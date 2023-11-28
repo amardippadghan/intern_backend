@@ -7,20 +7,25 @@ const router = express.Router();
 const jwtKey = "amar";
 
 router.post("/signup", async (req, res) => {
-  const { username, email, password, userType } = req.body;
+  const { fullName, email, number, password, userType } = req.body;
 
   try {
     const existingUser = await User.findOne({ email });
+    const existingnumber = await User.findOne({ number });
 
     if (existingUser) {
       return res.status(409).json({ error: "User already exists" });
+    }
+    else if (existingnumber) {
+      return res.status(409).json({ error: "Number already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
-      username: username,
+      fullName: fullName,
       email: email,
+      number:number , 
       password: hashedPassword,
       userType: userType,
     });

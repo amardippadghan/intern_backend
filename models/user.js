@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  username: {
+  fullName: {
     type: String,
     required: true,
     maxLength: 50,
@@ -15,6 +15,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     maxLength: 100,
+  },
+  number:{
+    type : String,
+    required : true,
+    maxLength : 10,
+
   },
   userType: {
     type: String,
