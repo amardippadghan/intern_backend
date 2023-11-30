@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const employerRoutes = require("./routes/employerRoutes");
 
 mongoose
   .connect(
@@ -19,6 +20,7 @@ app.use(express.json());
 
 app.use("/auth", authRoutes); // Mount authentication routes
 app.use("/users", userRoutes); // Mount user-related routes
+app.use("/employers", employerRoutes); // Mount employer-related routes"
 
 app.listen(8000, () => {
   console.log("Server is running on http://localhost:8000/");

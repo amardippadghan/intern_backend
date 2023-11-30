@@ -35,8 +35,9 @@ router.post("/signup", async (req, res) => {
 
     // Return the token and created user's email in the response
     res.json({
-      token,
-      user: createdUser,
+    
+     
+      userId: createdUser._id,
     });
   } catch (error) {
     res.status(500).json({ error: "Something went wrong" });
@@ -60,14 +61,16 @@ router.post("/signin", async (req, res) => {
     }
 
     const token = jwt.sign({ email }, jwtKey);
-    // Include user data in the response
+
+    // Include user data in the response with modified userId (_id)
     res.json({
-      token,
-      user: { email: user.email /* Other user data fields */ },
+      userId: user._id, // Using user._id as userId
+     
     });
   } catch (error) {
     res.status(500).json({ error: "Something went wrong" });
   }
 });
+
 
 module.exports = router;
