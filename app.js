@@ -1,8 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const employerRoutes = require("./routes/employerRoutes");
+
+
 
 mongoose
   .connect(
@@ -16,6 +19,7 @@ mongoose
   });
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.use("/auth", authRoutes); // Mount authentication routes
