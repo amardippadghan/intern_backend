@@ -9,21 +9,21 @@ const router = express.Router();
 const jwtKey = "amar";
 
 // Middleware to check JWT token
-// const verifyToken = (req, res, next) => {
-//   const token = req.query.token; // Assuming the token is sent as a query parameter
+const verifyToken = (req, res, next) => {
+  const token = req.query.token; // Assuming the token is sent as a query parameter
 
-//   if (!token) {
-//     return res.status(401).json({ error: "Unauthorized: Token not provided" });
-//   }
+  if (!token) {
+    return res.status(401).json({ error: "Unauthorized: Token not provided" });
+  }
 
-//   jwt.verify(token, jwtKey, (err, decoded) => {
-//     if (err) {
-//       return res.status(401).json({ error: "Unauthorized: Invalid token" });
-//     }
-//     req.user = decoded;
-//     next();
-//   });
-// };
+  jwt.verify(token, jwtKey, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ error: "Unauthorized: Invalid token" });
+    }
+    req.user = decoded;
+    next();
+  });
+};
 
 
 router.put("/:id", async (req, res) => {

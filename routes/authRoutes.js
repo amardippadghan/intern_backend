@@ -15,8 +15,7 @@ router.post("/signup", async (req, res) => {
 
     if (existingUser) {
       return res.status(409).json({ error: "User already exists" });
-    }
-    else if (existingnumber) {
+    } else if (existingnumber) {
       return res.status(409).json({ error: "Number already exists" });
     }
 
@@ -25,7 +24,7 @@ router.post("/signup", async (req, res) => {
     const newUser = new User({
       fullName: fullName,
       email: email,
-      number:number , 
+      number: number,
       password: hashedPassword,
       userType: userType,
     });
@@ -35,8 +34,6 @@ router.post("/signup", async (req, res) => {
 
     // Return the token and created user's email in the response
     res.json({
-    
-     
       userId: createdUser._id,
     });
   } catch (error) {
@@ -65,12 +62,19 @@ router.post("/signin", async (req, res) => {
     // Include user data in the response with modified userId (_id)
     res.json({
       userId: user._id, // Using user._id as userId
-     
     });
   } catch (error) {
     res.status(500).json({ error: "Something went wrong" });
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const allUsers = await User.find();
+    res.json(allUsers);
+  } catch (error) {
+    res.status(500).json({ error: "Something went wrong" });
+  }
+});
 
 module.exports = router;
